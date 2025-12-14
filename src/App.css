@@ -1,0 +1,102 @@
+#root{
+    --mainBackground : #FFF6EB;
+    --mainColor: #E66A5A;
+    --secondColor: #F2A7A0;
+    --textColor:#3A3A3A;
+}
+
+body, #root, html{
+    margin: 0;
+    height: 100%;
+}
+
+body{
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+body, div{
+    box-sizing: border-box;
+}
+
+.app{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--mainBackground);
+    color: var(--textColor);
+}
+
+.pomodoro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 320px;
+    /* background-color: black; */
+
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.055);
+}
+
+.mode{
+    font-size: 1.14rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+
+.tomato-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+
+    /*fondo */
+    background: radial-gradient(#ffd6d6, #ffb3b3);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+.tomato {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    width: 160px;
+
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+.tomato.enter {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+
+.tomato.exit {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+}
+
+.timer{
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+button{
+    font-family: inherit;
+    font-size: 1.14rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
