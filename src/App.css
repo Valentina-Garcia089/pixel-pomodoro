@@ -51,41 +51,40 @@ body, div{
 
 
 .tomato-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     position: relative;
     width: 220px;
     height: 220px;
-    margin: 0 auto;
 
-    /*fondo */
-    background: radial-gradient(#ffd6d6, #ffb3b3);
+    background: radial-gradient(
+        circle at top,
+        #FFECEC,
+        var(--mainBackground)
+    );
     border-radius: 50%;
-    overflow: hidden;
 }
 
 
 .tomato {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    width: 160px;
+    width: 150px;
 
-    transform: translateX(-50%) scale(0.8);
-    opacity: 0;
-
+    transform-origin: center bottom;
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 
 .tomato.enter {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
+    transform: scale(1) translateY(0);
 }
-
 
 .tomato.exit {
     opacity: 0;
-    transform: translateX(-50%) scale(0.8);
+    transform: scale(0.9) translateY(10px);
 }
+
 
 .timer{
     font-size: 3rem;
@@ -93,10 +92,57 @@ body, div{
     letter-spacing: 1px;
 }
 
+.grid-buttons-container{
+    display: grid;
+    grid-template-areas: 
+    "start pause"
+    "reset reset";
+
+    gap: 8px;
+}
+
 button{
     font-family: inherit;
     font-size: 1.14rem;
     font-weight: 600;
-    opacity: 0.8;
+
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
+}
+
+.start-btn{
+    grid-area: start;
+
+    background-color: var(--mainColor);
+    color: white;
+}
+
+.start-btn:hover{
+    opacity: 0.9;
+}
+
+.start-btn:active, .pause-btn:active, .reset-btn:active{
+    transform: scale(0.97);
+}
+
+.pause-btn{
+    grid-area: pause;
+}
+
+.pause-btn, .reset-btn{
+    background-color: #F2E2E0;
+    color: var(--textColor);
+}
+
+.pause-btn:hover, .reset-btn:hover{
+    background-color: #EFD6D3;
+}
+
+.reset-btn{
+    grid-area: reset;
 }
 

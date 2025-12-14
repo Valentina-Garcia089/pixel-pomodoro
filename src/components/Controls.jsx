@@ -1,11 +1,10 @@
-function Controls ({onStart, onPause, onReset, running}){
+function Controls ({onStart, onPause, onReset}){
     return(
-        <>
-            <div>Running: {running ? "true" : "false"}</div>
-            <button onClick={onStart}>Start</button>
-            <button onClick={onPause}>Pause</button>
-            <button onClick={onReset}>Reset</button>
-        </>
+        <div className="grid-buttons-container">
+            <button onClick={onStart} className="start-btn">Start</button>
+            <button onClick={onPause} className="pause-btn">Pause</button>
+            <button onClick={onReset} className="reset-btn">Reset</button>
+        </div>
     )
 }
 
