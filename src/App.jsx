@@ -12,6 +12,8 @@ function App() {
   const [focusCount, setFocusCount] = useState(0);
   const [timeLeft, setTimeLeft] = useState(1500);
   const [running, setRunning] = useState(false);
+  const [endTime, setEndTime] = useState(null);
+
 
   const modes = {
     focus: 1500,
@@ -21,6 +23,7 @@ function App() {
 
   function handleStart (){
     setRunning(true);
+    setEndTime(Date.now() + timeLeft * 1000); //hora a la que debería terminar el pomodoro
   }
 
   function handlePause (){
@@ -38,17 +41,22 @@ function App() {
 
   //timer
   useEffect(() => {
+    if(!running || !endTime){
+      return;
+    }
     let interval;
     if(running){
       interval = setInterval(() =>{
-        setTimeLeft(prev => prev - 1); //ultimo valor real. A este se le resta uno
+        //para obtener presición con el pomodoro se calculará la diferencia real de tiempo
+        const restante = Math.round((endTime - Date.now()) / 1000);
+        setTimeLeft(Math.max(restante, 0)); //si restante es negativo se usa 0 y si no se usa restante para que el tiempo no baje de 0
       }, 1000)
     }
 
     return () => {
       clearInterval(interval);
     };
-  }, [running]);
+  }, [running, endTime]);
 
 
 
@@ -104,14 +112,6 @@ function App() {
           onReset={handleReset}
           running={running}
         />
-
-        {/* <div> modo: {mode}</div> */}
-        {/* <div> timeLeft: {formatTime(timeLeft)}</div> */}
-        {/* <div> running: {running === true ? "true" : "false"}</div> */}
-
-        {/* <button onClick={handleStart}>Start</button>
-        <button onClick={handlePause}>Pause</button>
-        <button onClick={handleReset}>Reset</button> */}
       </div>
     </div>
   )
