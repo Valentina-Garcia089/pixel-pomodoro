@@ -21,7 +21,7 @@ Pixel Pomodoro es una aplicación Pomodoro sencilla y visual, diseñada con una 
 
 ## Tecnologías utilizadas
 
-* React ("useState" y "useEffect")
+* React (`useState` y `useEffect`)
 * JavaScript (lógica del temporizador y control de estados)
 * CSS (diseño visual y layout)
 
