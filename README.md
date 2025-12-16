@@ -50,5 +50,3 @@ Funcionalidades planeadas:
 * Sonido cuando el temporizador llega a cero
 * Notificaciones del sistema
 * Posibles opciones de personalización (tiempos o sonidos)
-
----
