@@ -1,16 +1,52 @@
-# React + Vite
+# Pixel Pomodoro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Pixel Pomodoro es una aplicación Pomodoro sencilla y visual, diseñada con una estética minimalista y una mascota en pixel art que cambia de animación según el estado del temporizador. El objetivo del proyecto es practicar React mientras se crea una herramienta funcional para mejorar la concentración.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## React Compiler
+* Temporizador de 25 minutos para sesiones de concentración (Focus).
+* Descanso automático de 5 minutos después de cada sesión (Short Break).
+* Descanso largo de 15 minutos tras completar 4 sesiones de focus (Long Break).
+* Mascota animada en pixel art que cambia según el modo:
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+  * Focus: trabajando
+  * Short Break: descansando
+  * Long Break: durmiendo
+* Controles para iniciar, pausar y reiniciar el temporizador.
+* Transiciones automáticas entre modos.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologías utilizadas
+
+* React (`useState` y `useEffect`)
+* JavaScript (lógica del temporizador y control de estados)
+* CSS (diseño visual y layout)
+
+---
+
+## Propósito del proyecto
+
+Este proyecto fue desarrollado como una práctica personal para reforzar conceptos de React, especialmente:
+
+* Manejo de estado con useState
+* Uso de efectos con useEffect
+* Comunicación entre componentes mediante props
+* Control de lógica basada en tiempo
+* Diseño de interfaces limpias y simples
+
+También forma parte de mi portafolio personal.
+
+---
+
+## Estado del proyecto
+
+En desarrollo.
+
+Funcionalidades planeadas:
+
+* Sonido cuando el temporizador llega a cero
+* Notificaciones del sistema
+* Posibles opciones de personalización (tiempos o sonidos)
