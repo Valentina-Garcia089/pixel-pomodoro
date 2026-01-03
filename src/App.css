@@ -146,3 +146,54 @@ button{
     grid-area: reset;
 }
 
+
+.completion-modal{
+    width: clamp(250px, 50vw, 400px);
+    height: 90px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 10px 15px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+
+    animation: rotation 0.9s linear infinite;
+}
+
+.icon-container{
+    width: clamp(70px, 15vw, 90px);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-container img{
+    width: 90%;
+
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-1deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(1deg);
+    }
+    0% {
+        transform: rotate(0deg);
+    }
+}
