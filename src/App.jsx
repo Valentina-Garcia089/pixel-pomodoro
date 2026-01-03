@@ -10,6 +10,7 @@ function App() {
 
   // se crearán estados para el modo en el que se encuentra el pomodoro, para el tiempo faltante y para saber si este está corriendo
   const [mode, setMode] = useState("focus");
+  const [prevMode, setPrevMode] = useState(mode);
   const [focusCount, setFocusCount] = useState(0);
   // const [timeLeft, setTimeLeft] = useState(1500);
   const [timeLeft, setTimeLeft] = useState(5);
@@ -67,6 +68,9 @@ function App() {
   useEffect(() => {
     if(timeLeft === 0){
       setRunning(false);
+      setPrevMode(mode);
+
+      setOpenModal(true);
       if(mode === "focus"){
         const nextFocusCount = focusCount +1;
         setFocusCount(nextFocusCount);
@@ -101,19 +105,18 @@ function App() {
 
   //modal de finalización de un modo
   useEffect(() => {
-    if(timeLeft ===0){
-      setOpenModal(true);
-      if(openModal){
-        const timer = setTimerOut(() => {
-          setOpenModal(false);
-        }, 5000)
+    if(!openModal)
+      return;
 
-        return() => {
-          clearTimeout(timer);
-        }
-      }
+    setOpenModal(true);
+    const timer = setTimeout(() => {
+      setOpenModal(false);
+    }, 8000)
+
+    return() => {
+      clearTimeout(timer);
     }
-  }, [timeLeft, openModal])
+  }, [openModal]);
 
 
 
@@ -132,7 +135,7 @@ function App() {
 
         {/* sin la condición siempre se va a renderizar el modal */}
         {openModal && <Modal 
-          mode = {mode}
+          prevMode = {prevMode}
         />}
       </div>
     </div>

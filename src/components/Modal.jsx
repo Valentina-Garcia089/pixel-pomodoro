@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import soundIcon from "../assets/icons/sound.png";
 
-function Modal ({mode}){
+function Modal ({prevMode}){
     const message = {
         focus: "The focus mode has finished.",
         shortBreak: "The shortBreak mode has finished.",
@@ -19,7 +19,7 @@ function Modal ({mode}){
             <div className="icon-container">
                 <img src={soundIcon} alt="sound icon" />
             </div>
-            <span>{message[mode]}</span>
+            <span>{message[prevMode]}</span>
         </motion.div>
     )
 }
