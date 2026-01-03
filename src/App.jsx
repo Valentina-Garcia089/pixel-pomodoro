@@ -4,15 +4,18 @@ import TimerDisplay from "./components/TimerDisplay";
 import ModeDisplay from "./components/ModeDisplay";
 import Controls from "./components/Controls";
 import Tomato from "./components/Tomato";
+import Modal from "./components/Modal";
 
 function App() {
 
   // se crearán estados para el modo en el que se encuentra el pomodoro, para el tiempo faltante y para saber si este está corriendo
   const [mode, setMode] = useState("focus");
   const [focusCount, setFocusCount] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(1500);
+  // const [timeLeft, setTimeLeft] = useState(1500);
+  const [timeLeft, setTimeLeft] = useState(5);
   const [running, setRunning] = useState(false);
   const [endTime, setEndTime] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
 
   const modes = {
@@ -64,7 +67,6 @@ function App() {
   useEffect(() => {
     if(timeLeft === 0){
       setRunning(false);
-
       if(mode === "focus"){
         const nextFocusCount = focusCount +1;
         setFocusCount(nextFocusCount);
@@ -85,7 +87,6 @@ function App() {
 
   }, [timeLeft, mode, focusCount]);
 
-
   function formatTime (seg) {
     let minutes = Math.floor(seg / 60);
     let seconds = seg %60;
@@ -97,6 +98,22 @@ function App() {
   }
 
 
+
+  //modal de finalización de un modo
+  useEffect(() => {
+    if(timeLeft ===0){
+      setOpenModal(true);
+      if(openModal){
+        const timer = setTimerOut(() => {
+          setOpenModal(false);
+        }, 5000)
+
+        return() => {
+          clearTimeout(timer);
+        }
+      }
+    }
+  }, [timeLeft, openModal])
 
 
 
@@ -112,6 +129,11 @@ function App() {
           onReset={handleReset}
           running={running}
         />
+
+        {/* sin la condición siempre se va a renderizar el modal */}
+        {openModal && <Modal 
+          mode = {mode}
+        />}
       </div>
     </div>
   )
