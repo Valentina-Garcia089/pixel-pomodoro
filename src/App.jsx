@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { AnimatePresence } from "framer-motion";
 import './App.css'
 import TimerDisplay from "./components/TimerDisplay";
 import ModeDisplay from "./components/ModeDisplay";
 import Controls from "./components/Controls";
 import Tomato from "./components/Tomato";
 import Modal from "./components/Modal";
-import { AnimatePresence } from "framer-motion";
+import bellSound from "./assets/sounds/bells.mp3"
 
 
 function App() {
@@ -14,11 +15,12 @@ function App() {
   const [mode, setMode] = useState("focus");
   const [prevMode, setPrevMode] = useState(mode);
   const [focusCount, setFocusCount] = useState(0);
-  // const [timeLeft, setTimeLeft] = useState(1500);
-  const [timeLeft, setTimeLeft] = useState(2);
+  const [timeLeft, setTimeLeft] = useState(1500);
   const [running, setRunning] = useState(false);
   const [endTime, setEndTime] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+
+  const audioRef = useRef(null);
 
 
   const modes = {
@@ -120,6 +122,25 @@ function App() {
     return() => {
       clearTimeout(timer);
     }
+  }, [openModal]);
+
+
+  //tono => useRef => misma instancia de algo a lo largo del tiempo sin que React lo destruya
+  useEffect(() => {
+    if(!openModal)
+      return;
+
+    audioRef.current = new Audio (bellSound);
+    audioRef.current.volume = 0.6;
+    audioRef.current.loop = true;
+
+    audioRef.current.play().catch(() => {});
+
+    return () => {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    };
   }, [openModal]);
 
 
