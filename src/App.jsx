@@ -5,6 +5,8 @@ import ModeDisplay from "./components/ModeDisplay";
 import Controls from "./components/Controls";
 import Tomato from "./components/Tomato";
 import Modal from "./components/Modal";
+import { AnimatePresence } from "framer-motion";
+
 
 function App() {
 
@@ -13,7 +15,7 @@ function App() {
   const [prevMode, setPrevMode] = useState(mode);
   const [focusCount, setFocusCount] = useState(0);
   // const [timeLeft, setTimeLeft] = useState(1500);
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(2);
   const [running, setRunning] = useState(false);
   const [endTime, setEndTime] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -91,6 +93,8 @@ function App() {
 
   }, [timeLeft, mode, focusCount]);
 
+
+
   function formatTime (seg) {
     let minutes = Math.floor(seg / 60);
     let seconds = seg %60;
@@ -134,9 +138,13 @@ function App() {
         />
 
         {/* sin la condición siempre se va a renderizar el modal */}
-        {openModal && <Modal 
-          prevMode = {prevMode}
-        />}
+        <AnimatePresence>
+          {openModal && <div className="dark-layer"> 
+            <Modal 
+              prevMode = {prevMode}
+            />
+          </div>}
+        </AnimatePresence>
       </div>
     </div>
   )
