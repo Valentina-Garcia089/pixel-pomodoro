@@ -7,6 +7,8 @@ import Controls from "./components/Controls";
 import Tomato from "./components/Tomato";
 import Modal from "./components/Modal";
 import bellSound from "./assets/sounds/bells.mp3"
+import { div } from "framer-motion/client";
+import Settings from "./components/Settings";
 
 
 function App() {
@@ -15,10 +17,12 @@ function App() {
   const [mode, setMode] = useState("focus");
   const [prevMode, setPrevMode] = useState(mode);
   const [focusCount, setFocusCount] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(1500);
+  const [timeLeft, setTimeLeft] = useState(1500); // 25:00 -> 24:59 ...
   const [running, setRunning] = useState(false);
   const [endTime, setEndTime] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openSettingsModal, setOpenSettingsModal] = useState(false);
+  const [newMode, setNewMode] = useState(mode);
 
   const audioRef = useRef(null);
 
@@ -31,7 +35,7 @@ function App() {
 
   function handleStart (){
     setRunning(true);
-    setEndTime(Date.now() + timeLeft * 1000); //hora a la que debería terminar el pomodoro
+    setEndTime(Date.now() + timeLeft * 1000); //hora a la que debería terminar el pomodoro -> 10:00 -> 10:25 
   }
 
   function handlePause (){
@@ -42,6 +46,12 @@ function App() {
     setRunning(false);
 
     setTimeLeft(modes[mode]);
+  }
+
+  function handleOpenSettings (){
+    if(running) setRunning(false);
+
+    setOpenSettingsModal(true);
   }
 
 
@@ -109,7 +119,7 @@ function App() {
 
 
 
-  //modal de finalización de un modo
+  //modal de finalización de un modo. Proceso de cierre automatico
   useEffect(() => {
     if(!openModal)
       return;
@@ -125,13 +135,13 @@ function App() {
   }, [openModal]);
 
 
-  //tono => useRef => misma instancia de algo a lo largo del tiempo sin que React lo destruya
+
   useEffect(() => {
     if(!openModal)
       return;
 
     audioRef.current = new Audio (bellSound);
-    audioRef.current.volume = 0.6;
+    audioRef.current.volume = 0.8; //TODO
     audioRef.current.loop = true;
 
     audioRef.current.play().catch(() => {});
@@ -151,6 +161,13 @@ function App() {
         <ModeDisplay mode={mode} />
         <Tomato mode={mode} running={running}/>
         <TimerDisplay time= {formatTime(timeLeft)}/>
+        <button 
+          className="btn-settings"
+          onClick={handleOpenSettings}
+        >
+          Settings
+        </button>
+
         <Controls 
           onStart={handleStart}
           onPause={handlePause}
@@ -163,6 +180,13 @@ function App() {
           {openModal && <div className="dark-layer"> 
             <Modal 
               prevMode = {prevMode}
+            />
+          </div>}
+
+          {openSettingsModal && <div className="dark-layer">
+            <Settings
+                mode = {modes[mode]}
+                onClose = {() => setOpenSettingsModal(false)}
             />
           </div>}
         </AnimatePresence>
