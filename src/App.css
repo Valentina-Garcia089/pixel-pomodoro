@@ -96,7 +96,7 @@ body, div{
     display: grid;
     grid-template-areas: 
     "start pause"
-    "reset reset";
+    "reset settings";
 
     gap: 8px;
 }
@@ -114,26 +114,26 @@ button{
     transition: background-color 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
 }
 
-.start-btn{
+.start-btn, .apply-btn{
     grid-area: start;
 
     background-color: var(--mainColor);
     color: white;
 }
 
-.start-btn:hover{
+.start-btn:hover, .apply-btn:hover{
     opacity: 0.9;
 }
 
-.start-btn:active, .pause-btn:active, .reset-btn:active{
-    transform: scale(0.97);
+.start-btn:active, .pause-btn:active, .reset-btn:active, .settings-btn:active, .apply-btn:active, .timer-btn:active{
+    transform: scale(0.96);
 }
 
 .pause-btn{
     grid-area: pause;
 }
 
-.pause-btn, .reset-btn{
+.pause-btn, .reset-btn, .settings-btn, .timer-btn{
     background-color: #F2E2E0;
     color: var(--textColor);
 }
@@ -144,6 +144,30 @@ button{
 
 .reset-btn{
     grid-area: reset;
+}
+
+.settings-btn{
+    grid-area: settings;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.settings-btn svg, .timer-btn svg {
+    width: 26px;
+    height: 26px;
+    color: var(--textColor);
+    transition: transform 0.5s ease;
+}
+
+.settings-btn:hover, .timer-btn:hover {
+    background-color: #e5dbd5;
+}
+
+.settings-btn:hover svg {
+    transform: rotate(45deg);
+    color: #111;
 }
 
 
@@ -189,3 +213,62 @@ button{
     width: 90%;
 
 }
+
+.modal-settings{
+    height: auto;
+}
+
+.form-container{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.timer-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.timer-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+}
+
+.timer-input{
+    width: 60px;
+    background: transparent;
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 2rem;
+    border: none;
+    outline:none
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-container span{
+    font-weight: 600;
+    font-size: 1.14rem;
+}
+
+.apply-btn{
+    margin-top: 15px;
+}
+

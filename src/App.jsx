@@ -54,6 +54,10 @@ function App() {
     setOpenSettingsModal(true);
   }
 
+  function handleTimeChange (minutosNuevos){
+    const segundos = minutosNuevos *60;
+    setTimeLeft(segundos);
+  }
 
 
 
@@ -127,7 +131,7 @@ function App() {
     setOpenModal(true);
     const timer = setTimeout(() => {
       setOpenModal(false);
-    }, 8000)
+    }, 9000)
 
     return() => {
       clearTimeout(timer);
@@ -161,18 +165,12 @@ function App() {
         <ModeDisplay mode={mode} />
         <Tomato mode={mode} running={running}/>
         <TimerDisplay time= {formatTime(timeLeft)}/>
-        <button 
-          className="btn-settings"
-          onClick={handleOpenSettings}
-        >
-          Settings
-        </button>
 
         <Controls 
           onStart={handleStart}
           onPause={handlePause}
           onReset={handleReset}
-          running={running}
+          onSetUp={handleOpenSettings}
         />
 
         {/* sin la condición siempre se va a renderizar el modal */}
@@ -187,6 +185,7 @@ function App() {
             <Settings
                 mode = {modes[mode]}
                 onClose = {() => setOpenSettingsModal(false)}
+                onTimeChange = {handleTimeChange}
             />
           </div>}
         </AnimatePresence>
